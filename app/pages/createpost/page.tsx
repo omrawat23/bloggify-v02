@@ -10,16 +10,7 @@ import Editor from '@/components/editor/editor'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { userAtom } from '@/store/userAtoms'
-
-export const defaultValue = {
-  type: 'doc',
-  content: [
-    {
-      type: 'paragraph',
-      content: []
-    }
-  ]
-}
+import { defaultValue } from './defaultValue';
 
 export default function ContentForm() {
   const [title, setTitle] = useState('')
