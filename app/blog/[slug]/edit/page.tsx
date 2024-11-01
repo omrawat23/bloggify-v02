@@ -10,16 +10,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
 import { userAtom } from '@/store/userAtoms'
+import { defaultValue } from './defaultValue';
 
-export const defaultValue = {
-  type: 'doc',
-  content: [
-    {
-      type: 'paragraph',
-      content: []
-    }
-  ]
-}
+
 
 // Helper function to try parsing JSON or return defaultValue
 const parseContent = (content: string) => {
