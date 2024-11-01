@@ -15,7 +15,7 @@ export default function HeroSection() {
     <div className="relative">
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center space-y-8 px-4 ">
         <AnimatedShinyText className="inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-1 text-sm transition-colors duration-300 ease-out hover:text-neutral-600 dark:hover:text-neutral-400 mt-[-140px]">
-          <span>✨ Introducing Bloggify</span>
+          <span>✨ Introducing Blogora</span>
           <ArrowRightIcon className="ml-1 h-3 w-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
         </AnimatedShinyText>
 
