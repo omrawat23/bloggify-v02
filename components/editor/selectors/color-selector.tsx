@@ -138,6 +138,7 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
               key={name}
               onSelect={() => {
                 editor.commands.unsetColor()
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 name !== 'Default' &&
                   editor
                     .chain()
@@ -169,6 +170,7 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
               key={name}
               onSelect={() => {
                 editor.commands.unsetHighlight()
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 name !== 'Default' &&
                   editor.chain().focus().setHighlight({ color }).run()
                 onOpenChange(false)

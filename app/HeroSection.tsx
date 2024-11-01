@@ -5,14 +5,12 @@ import AnimatedShinyText from "@/components/ui/animated-shiny-text"
 import { Hero } from "@/components/Hero"
 import GradualSpacing from "@/components/ui/gradual-spacing"
 import ShimmerButton from "@/components/ui/shimmer-button"
-import { CoolMode } from "@/components/ui/cool-mode"
 import { useAtom } from "jotai"
-import { userAtom, loadingAtom } from "@/store/userAtoms"
+import { userAtom } from "@/store/userAtoms"
 import Link from "next/link"
 
 export default function HeroSection() {
   const [user] = useAtom(userAtom) 
-  const [loading] = useAtom(loadingAtom) 
   return (
     <div className="relative">
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center space-y-8 px-4 ">
@@ -33,7 +31,7 @@ export default function HeroSection() {
         <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
           {user ? ( // Check if the user is logged in
             <>
-              <CoolMode>
+            
                 <Link href='/pages/createpost'>
                 <ShimmerButton className="shadow-lg">
                   <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
@@ -41,7 +39,7 @@ export default function HeroSection() {
                   </span>
                 </ShimmerButton>
                 </Link>
-              </CoolMode>
+              
 
               <Link href='/pages/home'>
                 <ShimmerButton className="shadow-lg">
@@ -53,13 +51,13 @@ export default function HeroSection() {
             </>
           ) : (
             <>
-              <CoolMode>
+              
                 <ShimmerButton className="shadow-lg">
                   <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
                     Get Started
                   </span>
                 </ShimmerButton>
-              </CoolMode>
+            
 
               <ShimmerButton className="shadow-lg">
                 <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">

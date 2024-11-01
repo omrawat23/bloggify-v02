@@ -11,6 +11,7 @@ export function isValidUrl(url: string) {
   try {
     new URL(url)
     return true
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_e) {
     return false
   }
@@ -21,6 +22,7 @@ export function getUrlFromString(str: string) {
     if (str.includes('.') && !str.includes(' ')) {
       return new URL(`https://${str}`).toString()
     }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_e) {
     return null
   }

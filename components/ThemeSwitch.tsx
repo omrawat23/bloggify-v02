@@ -24,6 +24,7 @@ export default function ThemeSwitch() {
     />
   )
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleThemeChange = (checked: any) => {
     setTheme(checked ? 'dark' : 'light')
   }

@@ -8,7 +8,6 @@ import {
   EditorCommandItem,
   EditorCommandList,
   EditorContent,
-  type EditorInstance,
   EditorRoot,
   type JSONContent
 } from 'novel'
@@ -31,6 +30,7 @@ import { ColorSelector } from '@/components/editor/selectors/color-selector'
 
 import { Separator } from '@/components/ui/separator'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const hljs = require('highlight.js')
 
 const extensions = [...defaultExtensions, slashCommand]
@@ -57,10 +57,11 @@ export default function Editor({ initialValue, onChange }: EditorProps) {
   const [openAI, setOpenAI] = useState(false)
 
   //Apply Codeblock Highlighting on the HTML from editor.getHTML()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const highlightCodeblocks = (content: string) => {
     const doc = new DOMParser().parseFromString(content, 'text/html')
     doc.querySelectorAll('pre code').forEach(el => {
-      // @ts-ignore
+      // @ts-expect-error
       // https://highlightjs.readthedocs.io/en/latest/api.html?highlight=highlightElement#highlightelement
       hljs.highlightElement(el)
     })
