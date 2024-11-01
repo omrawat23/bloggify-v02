@@ -61,6 +61,8 @@ export default function Editor({ initialValue, onChange }: EditorProps) {
   const highlightCodeblocks = (content: string) => {
     const doc = new DOMParser().parseFromString(content, 'text/html')
     doc.querySelectorAll('pre code').forEach(el => {
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       // https://highlightjs.readthedocs.io/en/latest/api.html?highlight=highlightElement#highlightelement
       hljs.highlightElement(el)
