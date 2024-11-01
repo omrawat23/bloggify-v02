@@ -139,6 +139,7 @@ export async function updateBlogAction(data: UpdateBlogData) {
     revalidatePath('/blog')
     
     return { success: true }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error updating blog post:', error)
     return { error: error.message || 'Failed to update the blog post.' }
@@ -164,6 +165,7 @@ export async function createBlogAction(data: BlogActionData) {
       imageUrl = await getDownloadURL(imageRef)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const postData: Omit<BlogPost, 'createdAt'> & { createdAt: any } = {
       title: data.title,
       content: data.content,
@@ -185,6 +187,7 @@ export async function createBlogAction(data: BlogActionData) {
 
     revalidatePath('/blog')
     return { success: true, id: docRef.id }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error creating blog post:', error)
     return { error: error.message || 'Failed to create the blog post.' }

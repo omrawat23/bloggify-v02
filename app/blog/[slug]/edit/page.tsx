@@ -25,6 +25,7 @@ export const defaultValue = {
 const parseContent = (content: string) => {
   try {
     return JSON.parse(content)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     // If content is HTML or invalid JSON, create a default structure with the content
     return {
