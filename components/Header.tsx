@@ -1,5 +1,5 @@
-
 "use client"
+
 import React from 'react'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import ThemeSwitch from './ThemeSwitch'
@@ -167,5 +167,4 @@ const Header = () => {
     </div>
   )
 }
-
 export default Header

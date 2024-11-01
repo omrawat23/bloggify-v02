@@ -6,7 +6,7 @@ import { auth } from '@/firebase';
 import { userAtom, loadingAtom } from '@/store/userAtoms';
 
 interface UserProviderProps {
-  children: React.ReactNode; 
+      children: React.ReactNode; 
 }
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {

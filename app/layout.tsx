@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import './prosemirror.css'
-import { Providers } from "../providers/providers";
+import { Providers } from "@/providers/Providers";
 import UserProvider from "@/providers/UserProvider";
 import { bric } from "@/utils/font";
 import Header from "@/components/Header";
