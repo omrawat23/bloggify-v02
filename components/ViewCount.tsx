@@ -5,7 +5,7 @@ export default async function incrementViews(postId: string) {
   try {
     const postRef = doc(db, 'posts', postId)
     await updateDoc(postRef, {
-      views: increment(1/2) // Atomic increment by 1
+      views: increment(1) // Atomic increment by 1
     })
     console.log(`Views incremented for post ${postId}`)
   } catch (error) {
