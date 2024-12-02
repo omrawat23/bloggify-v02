@@ -18,6 +18,7 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       setLoading(true);  // Set loading to true while checking auth state
       if (user) {
         const userData = {
+          id: user.uid || '',
           displayName: user.displayName || '',
           email: user.email || '',
           photoURL: user.photoURL || ''
