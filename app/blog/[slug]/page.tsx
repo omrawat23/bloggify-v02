@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs,query,where } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, Eye } from "lucide-react";
@@ -14,28 +14,39 @@ export default function ShowPost({ params }: { params: { slug: string } }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const docRef = doc(db, "posts", params.slug);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const postData = docSnap.data() as BlogPost;
-          setPost(postData);
-
-          // Increment the view count
-          incrementViewCount(params.slug)
-        } else {
-          setError("No such post found!");
-        }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (err) {
-        setError("Error fetching post");
+  const fetchPost = async () => {
+    try {
+      // Create a query to find documents where the slug field matches
+      const postsRef = collection(db, "posts");
+      const q = query(postsRef, where("slug", "==", params.slug));
+      
+      // Execute the query
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        // Get the first matching document
+        const docSnap = querySnapshot.docs[0];
+        
+        // The document ID is the random string
+        const postId = docSnap.id;
+        
+        // Get the full document data
+        const postData = {
+          ...docSnap.data() as BlogPost
+        };
+        
+        setPost(postData);
+        incrementViewCount(params.slug);
+      } else {
+        setError("No such post found!");
       }
-    };
+    } catch (err) {
+      setError("Error fetching post");
+    }
+  };
 
-    fetchPost();
-  }, [params.slug]);
+  fetchPost();
+}, [params.slug]);
 
   if (error) {
     return (

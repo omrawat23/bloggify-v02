@@ -2,6 +2,7 @@
 import { atom } from 'jotai';
 
 interface User {
+    id: string;
     displayName: string;
     email: string;
     photoURL: string;

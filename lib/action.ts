@@ -21,6 +21,8 @@ const postsCollection = collection(db, 'posts')
 
 // Define the base blog post type
 interface BlogPost {
+  slug: string;
+  readtime: number;
   title: string;
   content: string;
   desc: string;
@@ -37,6 +39,7 @@ interface BlogPost {
 // Define the type for creating a new blog post
 interface BlogActionData {
   title: string;
+  readtime: number;
   content: string;
   desc: string;
   tags?: string[];
@@ -147,12 +150,20 @@ export async function updateBlogAction(data: UpdateBlogData) {
 }
 
 export async function createBlogAction(data: BlogActionData) {
-  if (!data.title || !data.content || !data.desc || !data.authorId || !data.authorName  || !data.authorImage) {
+  if (!data.title || !data.content || !data.desc || !data.authorId || !data.authorName || !data.authorImage) {
     return { error: 'All fields are required.' }
   }
 
   try {
     let imageUrl = '';
+
+    // Create slug from title
+    const slug = data.title
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/[\s_-]+/g, '-') // Replace spaces or underscores with single hyphen
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
 
     // Upload image to Firebase Storage if image data is provided
     if (data.imageData && data.imageName) {
@@ -165,12 +176,13 @@ export async function createBlogAction(data: BlogActionData) {
       imageUrl = await getDownloadURL(imageRef)
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const postData: Omit<BlogPost, 'createdAt'> & { createdAt: any } = {
       title: data.title,
+      slug,
       content: data.content,
       desc: data.desc,
       tags: data.tags || [],
+      readtime: data.readtime,
       imageUrl,
       authorId: data.authorId,
       authorName: data.authorName,
@@ -187,9 +199,9 @@ export async function createBlogAction(data: BlogActionData) {
 
     revalidatePath('/blog')
     return { success: true, id: docRef.id }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error creating blog post:', error)
     return { error: error.message || 'Failed to create the blog post.' }
   }
 }
+

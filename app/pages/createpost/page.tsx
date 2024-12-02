@@ -16,6 +16,7 @@ export default function ContentForm() {
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
   const [tags, setTags] = useState<string[]>([])
+  const [readtime, setReadtime] = useState(5)
   const [currentTag, setCurrentTag] = useState('')
   const [img, setImage] = useState<File | null>(null)
   const [content, setContent] = useState('')
@@ -59,12 +60,13 @@ export default function ContentForm() {
         });
       }
   
-      // Call createBlogAction with the base64 image data and tags
+      // Call createBlogAction with the base64 image data, tags, and readtime
       const result = await createBlogAction({
         title,
         content,
         desc,
-        tags, // Add tags to the blog post creation
+        tags,
+        readtime, 
         imageData: imageBase64 as string,
         imageName: img?.name,
         authorId: user.email,
@@ -78,7 +80,8 @@ export default function ContentForm() {
         toast.success(`Blog post created successfully! ID: ${result.id}`);
         setTitle('');
         setDesc('');
-        setTags([]); // Reset tags
+        setTags([]);
+        setReadtime(5);
         setImage(null);
         setContent('');
       } else {
@@ -129,6 +132,14 @@ export default function ContentForm() {
           >
             Add Tag
           </Button>
+          <Input
+            type='number'
+            placeholder='Read time (minutes)'
+            value={readtime}
+            onChange={e => setReadtime(Number(e.target.value))}
+            min={1}
+            required
+          />
         </div>
 
         {tags.length > 0 && (
@@ -165,3 +176,4 @@ export default function ContentForm() {
     </MaxWidthWrapper>
   )
 }
+

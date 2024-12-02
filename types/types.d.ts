@@ -1,4 +1,5 @@
 export type BlogPost = {
+    slug: any
     id: string
     title: string
     desc: string

@@ -126,13 +126,13 @@ export default function HomePage() {
             <div className="grid gap-8">
               {blogPosts.map((post, index) => (
                 <motion.div
-                  key={post.id}
+                  key={post.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Card className="group overflow-hidden">
-                  <Link href={`/blog/${post.id}`}>
+                  <Link href={`/blog/${post.slug}`}>
                     <CardContent className="p-0">
                       <div className="flex flex-col md:flex-row gap-6">
                         <div className="md:w-1/2 h-[300px] relative">
